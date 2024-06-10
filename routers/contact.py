@@ -18,8 +18,8 @@ async def get_contact_all():
         contact_schema.Contact(
             id=1,
             name="test",
-            email="test",
-            url="test@test.com",
+            email="test@test.com",
+            url="test",
             gender=1,
             message="test",
             is_enabled=True,
