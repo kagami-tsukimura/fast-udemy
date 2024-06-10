@@ -1,5 +1,7 @@
 from fastapi import APIRouter
 
+import schemas.contact as contact_schema
+
 router = APIRouter(
     prefix="/contacts",
     tags=["contacts"],
