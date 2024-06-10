@@ -10,7 +10,7 @@ async def example():
     起動確認としてHello Worldを返します。
     """
 
-    return {"message": "Hello Worlds"}
+    return {"message": "Hello World!"}
 
 
 if __name__ == "__main__":
