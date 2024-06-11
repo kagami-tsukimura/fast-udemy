@@ -14,6 +14,7 @@ def main():
         "url": "https://example.com/",
         "gender": 1,
         "message": "test",
+        "is_enabled": True,
         "created_at": current_datetime,
     }
 
