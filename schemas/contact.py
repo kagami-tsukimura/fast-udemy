@@ -5,6 +5,7 @@ from pydantic import BaseModel, EmailStr, Field, HttpUrl
 
 class Contact(BaseModel):
     id: int
+    # 「...」 必須
     name: str = Field(..., min_length=2, max_length=50)
     email: EmailStr
     url: HttpUrl | None = Field(default=None)
