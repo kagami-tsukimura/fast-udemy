@@ -19,7 +19,7 @@ async def get_contact_all():
             id=1,
             name="test",
             email="test@test.com",
-            url="test",
+            url="https://example.com/",
             gender=1,
             message="test",
             is_enabled=True,
