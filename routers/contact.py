@@ -29,8 +29,8 @@ async def get_contact_all():
 
 
 @router.post("/", response_model=contact_schema.Contact)
-async def create_contact():
-    pass
+async def create_contact(body: contact_schema.Contact):
+    return contact_schema.Contact(**body.model_dump())
 
 
 @router.get("/{id}")
