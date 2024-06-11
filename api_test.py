@@ -9,7 +9,7 @@ def main():
     current_datetime = datetime.now().isoformat()
     body = {
         "id": 1,
-        "name": "test",
+        "name": 1,
         "email": "test@test.com",
         "url": "https://example.com/",
         "gender": 1,
@@ -19,7 +19,10 @@ def main():
     }
 
     res = requests.post(url, json.dumps(body))
-    print(res.json())
+    if res.status_code == 200:
+        print(res.json())
+    else:
+        print(f"{res.status_code} error: {res.text}")
 
 
 if __name__ == "__main__":
