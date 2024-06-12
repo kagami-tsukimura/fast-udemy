@@ -3,6 +3,15 @@ from datetime import datetime
 from pydantic import BaseModel, EmailStr, Field, HttpUrl
 
 
+class ContactList(BaseModel):
+    id: int
+    name: str = Field(..., min_length=2, max_length=50)
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
 class ContactBase(BaseModel):
     # 「...」 必須
     name: str = Field(..., min_length=2, max_length=50)
