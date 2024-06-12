@@ -22,3 +22,7 @@ class ContactDetail(ContactBase):
 
     class Config:
         from_attributes = True
+
+
+class ContactCreate(ContactBase):
+    pass
