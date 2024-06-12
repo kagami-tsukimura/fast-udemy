@@ -8,3 +8,8 @@ Base = declarative_base()
 db_session = sessionmaker(
     autocommit=False, autoflush=False, bind=engine, class_=AsyncSession
 )
+
+
+async def get_db():
+    async with db_session() as session:
+        yield session
