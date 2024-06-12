@@ -3,6 +3,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 
 DB_URL = "sqlite+aiosqlite:///fastapi-app.db"
 engine = create_async_engine(DB_URL, echo=True)
+
 Base = declarative_base()
 
 db_session = sessionmaker(
