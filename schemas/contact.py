@@ -11,3 +11,6 @@ class ContactBase(BaseModel):
     gender: int = Field(..., strict=True, ge=0, le=2)
     message: str = Field(..., max_length=200)
     is_enabled: bool = Field(default=False)
+
+    class Config:
+        from_attribute = True
