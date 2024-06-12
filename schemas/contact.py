@@ -3,7 +3,7 @@ from datetime import datetime
 from pydantic import BaseModel, EmailStr, Field, HttpUrl
 
 
-class Contact(BaseModel):
+class ContactBase(BaseModel):
     id: int
     # 「...」 必須
     name: str = Field(..., min_length=2, max_length=50)
