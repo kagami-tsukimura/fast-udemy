@@ -13,4 +13,4 @@ class ContactBase(BaseModel):
     is_enabled: bool = Field(default=False)
 
     class Config:
-        from_attribute = True
+        from_attributes = True
