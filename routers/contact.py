@@ -61,4 +61,4 @@ async def delete_contact(id: int, db: AsyncSession = Depends(get_db)):
     if not contact:
         raise HTTPException(status_code=404, detail="Contact not found")
 
-    return await contact_crud.delete_contact(db, id)
+    return await contact_crud.delete_contact(db, contact)
