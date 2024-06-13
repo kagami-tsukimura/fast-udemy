@@ -35,7 +35,7 @@ async def get_contact_all():
 async def create_contact(
     body: contact_schema.ContactCreate, db: AsyncSession = Depends(get_db)
 ):
-    return contact_schema.ContactCreate(**body.model_dump())
+    return await contact_crud.create_contact(db, body)
 
 
 @router.get("/{id}", response_model=contact_schema.Contact)
