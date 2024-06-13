@@ -1,3 +1,5 @@
+from typing import List, Tuple
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 import models.contact as contact_model
