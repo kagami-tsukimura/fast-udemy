@@ -60,6 +60,6 @@ async def get_contact_by_id(db: AsyncSession, id: int) -> contact_model.Contact 
         contact_model.Contact
     """
 
-    query = select(contact_model.Contact).where(contact_model.Contact.id == id)
+    query = select(contact_model.Contact).filter(contact_model.Contact.id == id)
     result: Result = await db.execute(query)
     return result.scalars().first()
