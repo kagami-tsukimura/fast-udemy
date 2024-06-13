@@ -32,7 +32,7 @@ async def create_contact(
     return sql_db
 
 
-async def get_contact_all(db: AsyncSession) -> List[contact_model.Contact]:
+async def get_contact_all(db: AsyncSession) -> List[Tuple[int, str, datetime]]:
     """
     Get all contacts
     Args:
