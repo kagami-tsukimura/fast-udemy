@@ -32,7 +32,9 @@ async def get_contact_all():
 
 
 @router.post("/", response_model=contact_schema.ContactCreate)
-async def create_contact(body: contact_schema.ContactCreate):
+async def create_contact(
+    body: contact_schema.ContactCreate, db: AsyncSession = Depends(get_db)
+):
     return contact_schema.ContactCreate(**body.model_dump())
 
 
