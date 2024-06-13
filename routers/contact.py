@@ -38,16 +38,16 @@ async def create_contact(
     return await contact_crud.create_contact(db, body)
 
 
-@router.get("/{id}", response_model=contact_schema.Contact)
-async def get_contact(id: int):
-    return contact_schema.Contact(id)
+# @router.get("/{id}", response_model=contact_schema.Contact)
+# async def get_contact(id: int):
+#     return contact_schema.Contact(id)
 
 
-@router.put("/{id}", response_model=contact_schema.Contact)
-async def update_contact(id: int, body: contact_schema.Contact):
-    return contact_schema.Contact(id, **body.model_dump())
+# @router.put("/{id}", response_model=contact_schema.Contact)
+# async def update_contact(id: int, body: contact_schema.Contact):
+#     return contact_schema.Contact(id, **body.model_dump())
 
 
-@router.delete("/{id}", response_model=contact_schema.Contact)
-async def delete_contact(id: int):
-    return
+# @router.delete("/{id}", response_model=contact_schema.Contact)
+# async def delete_contact(id: int):
+#     return
