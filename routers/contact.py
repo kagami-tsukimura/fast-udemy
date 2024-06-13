@@ -1,7 +1,9 @@
 from datetime import datetime
 
 from fastapi import APIRouter, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
 
+import cruds.contact as contact_crud
 import schemas.contact as contact_schema
 
 router = APIRouter(
