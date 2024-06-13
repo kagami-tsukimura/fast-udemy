@@ -38,7 +38,7 @@ async def get_contact_all(db: AsyncSession) -> List[Tuple[int, str, datetime]]:
     Args:
         db: AsyncSession
     Returns:
-        List[contact_model.Contact]
+        List[Tuple[int, str, datetime]]
     """
 
     query = select(contact_model.Contact)
