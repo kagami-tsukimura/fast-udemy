@@ -45,7 +45,10 @@ async def get_contact(id: int, db: AsyncSession = Depends(get_db)):
 
 
 @router.put("/{id}", response_model=contact_schema.ContactCreate)
-async def update_contact(id: int, body: contact_schema.ContactCreate):
+async def update_contact(
+    id: int, body: contact_schema.ContactCreate, db: AsyncSession = Depends(get_db)
+):
+
     return contact_schema.ContactCreate(id, **body.model_dump())
 
 
