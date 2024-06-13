@@ -50,7 +50,7 @@ async def get_contact_all(db: AsyncSession) -> List[Tuple[int, str, datetime]]:
     return result.all()
 
 
-async def get_contact_by_id(db: AsyncSession, id: int) -> contact_model.Contact:
+async def get_contact_by_id(db: AsyncSession, id: int) -> contact_model.Contact | None:
     """
     Get contact by id
     Args:
