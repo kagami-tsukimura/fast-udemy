@@ -63,3 +63,22 @@ async def get_contact_by_id(db: AsyncSession, id: int) -> contact_model.Contact 
     query = select(contact_model.Contact).filter(contact_model.Contact.id == id)
     result: Result = await db.execute(query)
     return result.scalars().first()
+
+
+async def update_contact(
+    db: AsyncSession,
+    body: contact_schema.ContactCreate,
+    original: contact_model.Contact,
+) -> contact_model.Contact:
+
+    original.name = body.name
+    original.email = body.email
+    if original.url:
+        original.url = str(body.url)
+    original.gender = body.gender
+    original.message = body.message
+
+    db.add(original)
+    await db.commit()
+    await db.refresh(original)
+    return original
