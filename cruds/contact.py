@@ -71,10 +71,14 @@ async def update_contact(
     original: contact_model.Contact,
 ) -> contact_model.Contact:
 
-    query = select(contact_model.Contact).filter(contact_model.Contact.id == id)
-    result = await db.execute(query)
-    db_contact = result.scalars().first()
-    db_contact.is_enabled = not db_contact.is_enabled
+    original.name = body.name
+    original.email = body.email
+    if original.url:
+        original.url = str(body.url)
+    original.gender = body.gender
+    original.message = body.message
+
+    db.add(original)
     await db.commit()
-    await db.refresh(db_contact)
-    return db_contact
+    await db.refresh(original)
+    return original
