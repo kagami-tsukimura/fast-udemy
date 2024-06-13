@@ -52,7 +52,7 @@ async def update_contact(
     if not contact:
         raise HTTPException(status_code=404, detail="Contact not found")
 
-    return contact_crud.update_contact(db, id)
+    return contact_crud.update_contact(db, body, original=contact)
 
 
 @router.delete("/{id}", response_model=None)
