@@ -13,12 +13,12 @@ router = APIRouter(
 )
 
 
-@router.get("/", response_model=list[contact_schema.Contact])
+@router.get("/", response_model=list[contact_schema.ContactBase])
 async def get_contact_all():
     dummy_data = datetime.now()
 
     return [
-        contact_schema.Contact(
+        contact_schema.ContactBase(
             id=1,
             name="test",
             email="test@test.com",
