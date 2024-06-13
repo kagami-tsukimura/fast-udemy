@@ -17,7 +17,7 @@ async def create_contact(
     """
 
     db_contact = contact.model_dump()
-    if db_contact["url"] is not None:
+    if db_contact["url"]:
         db_contact["url"] = str(db_contact["url"])
     db.add(db_contact)
     await db.commit()
