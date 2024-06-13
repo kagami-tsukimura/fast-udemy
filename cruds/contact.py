@@ -82,3 +82,17 @@ async def update_contact(
     await db.commit()
     await db.refresh(original)
     return original
+
+
+async def delete_contact(db: AsyncSession, id: int) -> None:
+    """
+    Delete contact
+    Args:
+        db: AsyncSession
+        id: int
+    Returns:
+        None
+    """
+
+    await db.delete(contact_model.Contact(id=id))
+    await db.commit()
