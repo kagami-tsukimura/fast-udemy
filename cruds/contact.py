@@ -19,7 +19,9 @@ async def create_contact(
     db_contact = contact.model_dump()
     if db_contact["url"]:
         db_contact["url"] = str(db_contact["url"])
-    db.add(db_contact)
+
+    sql_db = contact_model.Contact(**db_contact)
+    db.add(sql_db)
     await db.commit()
     await db.refresh(db_contact)
     return db_contact
