@@ -26,7 +26,7 @@ async def main(message: str = Depends(get_message)):
 
 
 @router.get("/", response_model=list[contact_schema.ContactList])
-async def get_contact_all():
+async def get_contact_all(db: AsyncSession = Depends(get_db)):
     dummy_data = datetime.now()
 
     return [
