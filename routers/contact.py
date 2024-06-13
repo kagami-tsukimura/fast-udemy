@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
 import cruds.contact as contact_crud
@@ -38,7 +38,10 @@ async def create_contact(
 
 @router.get("/{id}", response_model=contact_schema.ContactDetail)
 async def get_contact(id: int, db: AsyncSession = Depends(get_db)):
-    return contact_crud.get_contact_by_id(db, id)
+    contact = await contact_crud.get_contact_by_id(db, id)
+    if not contact:
+        raise HTTPException(status_code=404, detail="Contact not found")
+    return contact
 
 
 @router.put("/{id}", response_model=contact_schema.ContactCreate)
