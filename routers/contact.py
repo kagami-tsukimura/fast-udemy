@@ -19,6 +19,12 @@ def get_message():
     return message
 
 
+@router.get("/depends")
+async def main(message: str = Depends(get_message)):
+    print(f"main: {message}")
+    return {"message": message}
+
+
 @router.get("/", response_model=list[contact_schema.ContactList])
 async def get_contact_all():
     dummy_data = datetime.now()
