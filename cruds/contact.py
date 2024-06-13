@@ -63,3 +63,22 @@ async def get_contact_by_id(db: AsyncSession, id: int) -> contact_model.Contact 
     query = select(contact_model.Contact).filter(contact_model.Contact.id == id)
     result: Result = await db.execute(query)
     return result.scalars().first()
+
+
+async def update_contact(db: AsyncSession, id: int) -> contact_model.Contact:
+    """
+    Update contact
+    Args:
+        db: AsyncSession
+        id: int
+    Returns:
+        contact_model.Contact
+    """
+
+    query = select(contact_model.Contact).filter(contact_model.Contact.id == id)
+    result = await db.execute(query)
+    db_contact = result.scalars().first()
+    db_contact.is_enabled = not db_contact.is_enabled
+    await db.commit()
+    await db.refresh(db_contact)
+    return db_contact
