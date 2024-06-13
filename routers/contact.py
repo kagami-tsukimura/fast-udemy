@@ -48,6 +48,9 @@ async def get_contact(id: int, db: AsyncSession = Depends(get_db)):
 async def update_contact(
     id: int, body: contact_schema.ContactCreate, db: AsyncSession = Depends(get_db)
 ):
+    contact = await contact_crud.get_contact_by_id(db, id)
+    if not contact:
+        raise HTTPException(status_code=404, detail="Contact not found")
 
     return contact_schema.ContactCreate(id, **body.model_dump())
 
