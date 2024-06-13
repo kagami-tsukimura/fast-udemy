@@ -1,8 +1,11 @@
 from datetime import datetime
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
 
+import cruds.contact as contact_crud
 import schemas.contact as contact_schema
+from database import get_db
 
 router = APIRouter(
     prefix="/contacts",
@@ -10,12 +13,12 @@ router = APIRouter(
 )
 
 
-@router.get("/", response_model=list[contact_schema.Contact])
+@router.get("/", response_model=list[contact_schema.ContactList])
 async def get_contact_all():
     dummy_data = datetime.now()
 
     return [
-        contact_schema.Contact(
+        contact_schema.ContactBase(
             id=1,
             name="test",
             email="test@test.com",
@@ -28,21 +31,23 @@ async def get_contact_all():
     ]
 
 
-@router.post("/", response_model=contact_schema.Contact)
-async def create_contact(body: contact_schema.Contact):
-    return contact_schema.Contact(**body.model_dump())
+@router.post("/", response_model=contact_schema.ContactCreate)
+async def create_contact(
+    body: contact_schema.ContactCreate, db: AsyncSession = Depends(get_db)
+):
+    return await contact_crud.create_contact(db, body)
 
 
-@router.get("/{id}", response_model=contact_schema.Contact)
+@router.get("/{id}", response_model=contact_schema.ContactDetail)
 async def get_contact(id: int):
-    return contact_schema.Contact(id)
+    return contact_schema.ContactDetail(id)
 
 
-@router.put("/{id}", response_model=contact_schema.Contact)
-async def update_contact(id: int, body: contact_schema.Contact):
-    return contact_schema.Contact(id, **body.model_dump())
+@router.put("/{id}", response_model=contact_schema.ContactCreate)
+async def update_contact(id: int, body: contact_schema.ContactCreate):
+    return contact_schema.ContactCreate(id, **body.model_dump())
 
 
-@router.delete("/{id}", response_model=contact_schema.Contact)
+@router.delete("/{id}", response_model=None)
 async def delete_contact(id: int):
     return
