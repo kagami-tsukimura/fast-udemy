@@ -26,21 +26,9 @@ async def main(message: str = Depends(get_message)):
 
 
 @router.get("/", response_model=list[contact_schema.ContactList])
-async def get_contact_all():
-    dummy_data = datetime.now()
+async def get_contact_all(db: AsyncSession = Depends(get_db)):
 
-    return [
-        contact_schema.ContactBase(
-            id=1,
-            name="test",
-            email="test@test.com",
-            url="https://example.com/",
-            gender=1,
-            message="test",
-            is_enabled=True,
-            created_at=dummy_data,
-        )
-    ]
+    return await contact_crud.get_contact_all(db)
 
 
 @router.post("/", response_model=contact_schema.ContactCreate)

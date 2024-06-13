@@ -1,3 +1,8 @@
+from datetime import datetime
+from typing import List, Tuple
+
+from sqlalchemy import select
+from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import AsyncSession
 
 import models.contact as contact_model
@@ -25,3 +30,21 @@ async def create_contact(
     await db.commit()
     await db.refresh(sql_db)
     return sql_db
+
+
+async def get_contact_all(db: AsyncSession) -> List[Tuple[int, str, datetime]]:
+    """
+    Get all contacts
+    Args:
+        db: AsyncSession
+    Returns:
+        List[Tuple[int, str, datetime]]
+    """
+
+    query = select(
+        contact_model.Contact.id,
+        contact_model.Contact.name,
+        contact_model.Contact.created_at,
+    )
+    result: Result = await db.execute(query)
+    return result.all()
