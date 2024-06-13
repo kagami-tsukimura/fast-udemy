@@ -43,4 +43,4 @@ async def get_contact_all(db: AsyncSession) -> List[Tuple[int, str, datetime]]:
 
     query = select(contact_model.Contact)
     result: Result = await db.execute(query)
-    return result.scalars().all()
+    return result.all()
