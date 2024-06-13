@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 import cruds.contact as contact_crud
 import schemas.contact as contact_schema
+from database import get_db
 
 router = APIRouter(
     prefix="/contacts",
