@@ -23,5 +23,5 @@ async def create_contact(
     sql_db = contact_model.Contact(**db_contact)
     db.add(sql_db)
     await db.commit()
-    await db.refresh(db_contact)
-    return db_contact
+    await db.refresh(sql_db)
+    return sql_db
